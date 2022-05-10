@@ -1,0 +1,38 @@
+﻿<Window x:Class="DiplomEstateAgency.WindowAddUpdateDeals"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiplomEstateAgency"
+        mc:Ignorable="d"
+        Title="Добавление/Редактирование сделок" Height="450" Width="800" Icon="/загрузка.jpg">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="63*"/>
+            <ColumnDefinition Width="112*"/>
+            <ColumnDefinition Width="625*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+        </Grid.RowDefinitions>
+        <UniformGrid Columns="2" Grid.ColumnSpan="3">
+            <TextBlock>Квартира</TextBlock>
+            <ComboBox x:Name="Apa" DisplayMemberPath="ID" SelectedItem="{Binding Apartaments}"/>
+            <TextBlock>Владелец</TextBlock>
+            <ComboBox x:Name="Own" DisplayMemberPath="Surname" SelectedItem="{Binding Owners}"/>
+            <TextBlock>Риэлтор</TextBlock>
+            <ComboBox x:Name="Rltrs" DisplayMemberPath="Surname" SelectedItem="{Binding Realtors}"/>
+            <TextBlock>Покупатель</TextBlock>
+            <ComboBox x:Name="Cli" DisplayMemberPath="Surname" SelectedItem="{Binding Clients}"/>
+            <TextBlock>Дата_сделки</TextBlock>
+            <TextBox x:Name="DateS" Text="{Binding Date}"></TextBox>
+            <TextBlock>Цена_сделки</TextBlock>
+            <TextBox x:Name="DealPriceS" Text="{Binding DealPrice}"></TextBox>
+        </UniformGrid>
+        <Button x:Name="BtnSaveData" Click="BtnSaveData_Click" Grid.ColumnSpan="3" Margin="0,304,0,0" Grid.RowSpan="2">Сохранить</Button>
+        <Button x:Name="BtnExit" Grid.Row="1" Click="BtnExit_Click" Grid.ColumnSpan="3" Margin="0,60,0,0" Grid.RowSpan="2">Назад</Button>
+        <Image Margin="13,10,400,0" Source="/Добавлениередактирование сделки.jpg" Stretch="Fill" Grid.ColumnSpan="2" Grid.Column="1"/>
+    </Grid>
+</Window>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="761d8fb33f7d4cba94c8784a3c779f28" Name="Diagram1">
+        <EntityTypeShape EntityType="EstateAgencyModel.Apartaments" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.City" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.Clients" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.Deals" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.Flats" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.GarageParking" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.Gender" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.Houses_Plots" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.Owners" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.Realtors" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Apartaments_Flats" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Apartaments_GarageParking" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Apartaments_Houses_Plots" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Deals_Apartaments" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Flats_City" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK_GarageParking_City" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Houses_Plots_City" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Clients_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Deals_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Deals_Owners" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Deals_Realtors" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Owners_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK_Realtors_Gender" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

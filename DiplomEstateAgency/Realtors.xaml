@@ -1,0 +1,59 @@
+﻿<Window x:Class="DiplomEstateAgency.Realtors"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DiplomEstateAgency"
+        mc:Ignorable="d"
+        Title="ЖИЛФОНД - Риелторы" Height="450" Width="800" Icon="/загрузка.jpg">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" x:Name="StckLttrs" Orientation="Horizontal">
+            <TextBlock FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1"/>
+        <Menu Grid.Row="1" Height="25" VerticalAlignment="Top">
+            <MenuItem Header="Действия">
+                <MenuItem Header="Добавить" x:Name="BtnAddRe" Click="BtnAddRe_Click"></MenuItem>
+                <MenuItem Header="Удалить" x:Name="BtnDeleteRe" Click="BtnDeleteRe_Click"></MenuItem>
+                <Separator />
+            </MenuItem>
+        </Menu>
+
+        <StackPanel  Orientation="Horizontal">
+            <TextBlock FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"  Grid.Row="5">
+            
+            <TextBlock>Телефон</TextBlock>
+            <TextBox x:Name="NPhone" TextChanged="NPhone_TextChanged" Width="78"></TextBox>
+        </StackPanel>
+
+        <DataGrid Grid.Row="2" x:Name="DataGrid2" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Patronymic" Binding="{Binding Patronymic}"/>
+                <DataGridTextColumn Header="NumberPhone" Binding="{Binding NumberPhone}"/>
+                <DataGridTextColumn Header="Gender" Binding="{Binding Gender.Gender1}"/>
+                <DataGridTextColumn Header="DateBirth" Binding="{Binding DateBirth}"/>
+                <DataGridTemplateColumn Header="Редактировать">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="BtnEditData" Click="BtnEditData_Click">Изменить</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Image Margin="435,268,0,0" Source="/70362c54d43936fc32cbe5c8689fecab7f23.png" Stretch="Fill" Grid.Row="2"/>
+    </Grid>
+</Window>

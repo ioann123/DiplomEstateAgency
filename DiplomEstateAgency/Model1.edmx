@@ -1,0 +1,836 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище EstateAgencyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Apartaments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HousesOrPlots" Type="int" />
+          <Property Name="GarageParking" Type="int" />
+          <Property Name="Flats" Type="int" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="NumberPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="DateBirth" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Deals">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Apartament" Type="int" />
+          <Property Name="IDOwner" Type="int" />
+          <Property Name="IDRealtor" Type="int" />
+          <Property Name="IDClient" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="DealPrice" Type="money" />
+        </EntityType>
+        <EntityType Name="Flats">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="int" />
+          <Property Name="Street" Type="nvarchar" MaxLength="50" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Flat" Type="nvarchar" MaxLength="50" />
+          <Property Name="Entrance" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="money" />
+        </EntityType>
+        <EntityType Name="GarageParking">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="int" />
+          <Property Name="Street" Type="nvarchar" MaxLength="50" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Floor" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="money" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Houses/Plots">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="int" />
+          <Property Name="Street" Type="nvarchar" MaxLength="50" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Flat" Type="nvarchar" MaxLength="50" />
+          <Property Name="Entrance" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="money" />
+        </EntityType>
+        <EntityType Name="Owners">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="NumberPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="DateBirth" Type="date" />
+        </EntityType>
+        <EntityType Name="Realtors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="NumberPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="DateBirth" Type="date" />
+        </EntityType>
+        <Association Name="FK_Apartaments_Flats">
+          <End Role="Flats" Type="Self.Flats" Multiplicity="0..1" />
+          <End Role="Apartaments" Type="Self.Apartaments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flats">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartaments">
+              <PropertyRef Name="HousesOrPlots" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Apartaments_GarageParking">
+          <End Role="GarageParking" Type="Self.GarageParking" Multiplicity="0..1" />
+          <End Role="Apartaments" Type="Self.Apartaments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GarageParking">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartaments">
+              <PropertyRef Name="HousesOrPlots" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Apartaments_Houses/Plots">
+          <End Role="Houses/Plots" Type="Self.Houses/Plots" Multiplicity="0..1" />
+          <End Role="Apartaments" Type="Self.Apartaments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Houses/Plots">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartaments">
+              <PropertyRef Name="HousesOrPlots" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deals_Apartaments">
+          <End Role="Apartaments" Type="Self.Apartaments" Multiplicity="0..1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apartaments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="Apartament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deals_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deals_Owners">
+          <End Role="Owners" Type="Self.Owners" Multiplicity="0..1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owners">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="IDOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deals_Realtors">
+          <End Role="Realtors" Type="Self.Realtors" Multiplicity="0..1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realtors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="IDRealtor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flats_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Flats" Type="Self.Flats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Flats">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GarageParking_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="GarageParking" Type="Self.GarageParking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GarageParking">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Houses/Plots_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Houses/Plots" Type="Self.Houses/Plots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Houses/Plots">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Owners_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Owners" Type="Self.Owners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Owners">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Realtors_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Realtors" Type="Self.Realtors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Realtors">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище EstateAgencyModelContainer">
+          <EntitySet Name="Apartaments" EntityType="Self.Apartaments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deals" EntityType="Self.Deals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flats" EntityType="Self.Flats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GarageParking" EntityType="Self.GarageParking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Houses/Plots" EntityType="Self.Houses/Plots" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owners" EntityType="Self.Owners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Realtors" EntityType="Self.Realtors" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Apartaments_Flats" Association="Self.FK_Apartaments_Flats">
+            <End Role="Flats" EntitySet="Flats" />
+            <End Role="Apartaments" EntitySet="Apartaments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Apartaments_GarageParking" Association="Self.FK_Apartaments_GarageParking">
+            <End Role="GarageParking" EntitySet="GarageParking" />
+            <End Role="Apartaments" EntitySet="Apartaments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Apartaments_Houses/Plots" Association="Self.FK_Apartaments_Houses/Plots">
+            <End Role="Houses/Plots" EntitySet="Houses/Plots" />
+            <End Role="Apartaments" EntitySet="Apartaments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Gender" Association="Self.FK_Clients_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deals_Apartaments" Association="Self.FK_Deals_Apartaments">
+            <End Role="Apartaments" EntitySet="Apartaments" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deals_Clients" Association="Self.FK_Deals_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deals_Owners" Association="Self.FK_Deals_Owners">
+            <End Role="Owners" EntitySet="Owners" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deals_Realtors" Association="Self.FK_Deals_Realtors">
+            <End Role="Realtors" EntitySet="Realtors" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flats_City" Association="Self.FK_Flats_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Flats" EntitySet="Flats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GarageParking_City" Association="Self.FK_GarageParking_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="GarageParking" EntitySet="GarageParking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Houses/Plots_City" Association="Self.FK_Houses/Plots_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Houses/Plots" EntitySet="Houses/Plots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Owners_Gender" Association="Self.FK_Owners_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Owners" EntitySet="Owners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Realtors_Gender" Association="Self.FK_Realtors_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Realtors" EntitySet="Realtors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EstateAgencyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Apartaments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HousesOrPlots" Type="Int32" />
+          <Property Name="GarageParking" Type="Int32" />
+          <Property Name="Flats" Type="Int32" />
+          <NavigationProperty Name="Flats1" Relationship="Self.FK_Apartaments_Flats" FromRole="Apartaments" ToRole="Flats" />
+          <NavigationProperty Name="GarageParking1" Relationship="Self.FK_Apartaments_GarageParking" FromRole="Apartaments" ToRole="GarageParking" />
+          <NavigationProperty Name="Houses_Plots" Relationship="Self.FK_Apartaments_Houses_Plots" FromRole="Apartaments" ToRole="Houses_Plots" />
+          <NavigationProperty Name="Deals" Relationship="Self.FK_Deals_Apartaments" FromRole="Apartaments" ToRole="Deals" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Flats" Relationship="Self.FK_Flats_City" FromRole="City" ToRole="Flats" />
+          <NavigationProperty Name="GarageParking" Relationship="Self.FK_GarageParking_City" FromRole="City" ToRole="GarageParking" />
+          <NavigationProperty Name="Houses_Plots" Relationship="Self.FK_Houses_Plots_City" FromRole="City" ToRole="Houses_Plots" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumberPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="DateBirth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Gender1" Relationship="Self.FK_Clients_Gender" FromRole="Clients" ToRole="Gender" />
+          <NavigationProperty Name="Deals" Relationship="Self.FK_Deals_Clients" FromRole="Clients" ToRole="Deals" />
+        </EntityType>
+        <EntityType Name="Deals">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Apartament" Type="Int32" />
+          <Property Name="IDOwner" Type="Int32" />
+          <Property Name="IDRealtor" Type="Int32" />
+          <Property Name="IDClient" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="DealPrice" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Apartaments" Relationship="Self.FK_Deals_Apartaments" FromRole="Deals" ToRole="Apartaments" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Deals_Clients" FromRole="Deals" ToRole="Clients" />
+          <NavigationProperty Name="Owners" Relationship="Self.FK_Deals_Owners" FromRole="Deals" ToRole="Owners" />
+          <NavigationProperty Name="Realtors" Relationship="Self.FK_Deals_Realtors" FromRole="Deals" ToRole="Realtors" />
+        </EntityType>
+        <EntityType Name="Flats">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="Int32" />
+          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Flat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Entrance" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Apartaments" Relationship="Self.FK_Apartaments_Flats" FromRole="Flats" ToRole="Apartaments" />
+          <NavigationProperty Name="City1" Relationship="Self.FK_Flats_City" FromRole="Flats" ToRole="City" />
+        </EntityType>
+        <EntityType Name="GarageParking">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="Int32" />
+          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Floor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Apartaments" Relationship="Self.FK_Apartaments_GarageParking" FromRole="GarageParking" ToRole="Apartaments" />
+          <NavigationProperty Name="City1" Relationship="Self.FK_GarageParking_City" FromRole="GarageParking" ToRole="City" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_Gender" FromRole="Gender" ToRole="Clients" />
+          <NavigationProperty Name="Owners" Relationship="Self.FK_Owners_Gender" FromRole="Gender" ToRole="Owners" />
+          <NavigationProperty Name="Realtors" Relationship="Self.FK_Realtors_Gender" FromRole="Gender" ToRole="Realtors" />
+        </EntityType>
+        <EntityType Name="Houses_Plots">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="Int32" />
+          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Flat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Entrance" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Apartaments" Relationship="Self.FK_Apartaments_Houses_Plots" FromRole="Houses_Plots" ToRole="Apartaments" />
+          <NavigationProperty Name="City1" Relationship="Self.FK_Houses_Plots_City" FromRole="Houses_Plots" ToRole="City" />
+        </EntityType>
+        <EntityType Name="Owners">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumberPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="DateBirth" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Deals" Relationship="Self.FK_Deals_Owners" FromRole="Owners" ToRole="Deals" />
+          <NavigationProperty Name="Gender1" Relationship="Self.FK_Owners_Gender" FromRole="Owners" ToRole="Gender" />
+        </EntityType>
+        <EntityType Name="Realtors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumberPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="DateBirth" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Deals" Relationship="Self.FK_Deals_Realtors" FromRole="Realtors" ToRole="Deals" />
+          <NavigationProperty Name="Gender1" Relationship="Self.FK_Realtors_Gender" FromRole="Realtors" ToRole="Gender" />
+        </EntityType>
+        <Association Name="FK_Apartaments_Flats">
+          <End Role="Flats" Type="Self.Flats" Multiplicity="0..1" />
+          <End Role="Apartaments" Type="Self.Apartaments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flats">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartaments">
+              <PropertyRef Name="HousesOrPlots" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Apartaments_GarageParking">
+          <End Role="GarageParking" Type="Self.GarageParking" Multiplicity="0..1" />
+          <End Role="Apartaments" Type="Self.Apartaments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GarageParking">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartaments">
+              <PropertyRef Name="HousesOrPlots" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Apartaments_Houses_Plots">
+          <End Role="Houses_Plots" Type="Self.Houses_Plots" Multiplicity="0..1" />
+          <End Role="Apartaments" Type="Self.Apartaments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Houses_Plots">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartaments">
+              <PropertyRef Name="HousesOrPlots" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deals_Apartaments">
+          <End Role="Apartaments" Type="Self.Apartaments" Multiplicity="0..1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apartaments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="Apartament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flats_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Flats" Type="Self.Flats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Flats">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GarageParking_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="GarageParking" Type="Self.GarageParking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GarageParking">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Houses_Plots_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Houses_Plots" Type="Self.Houses_Plots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Houses_Plots">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deals_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deals_Owners">
+          <End Role="Owners" Type="Self.Owners" Multiplicity="0..1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owners">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="IDOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deals_Realtors">
+          <End Role="Realtors" Type="Self.Realtors" Multiplicity="0..1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realtors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="IDRealtor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Owners_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Owners" Type="Self.Owners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Owners">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Realtors_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Realtors" Type="Self.Realtors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Realtors">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EstateAgencyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Apartaments" EntityType="Self.Apartaments" />
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Deals" EntityType="Self.Deals" />
+          <EntitySet Name="Flats" EntityType="Self.Flats" />
+          <EntitySet Name="GarageParking" EntityType="Self.GarageParking" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" />
+          <EntitySet Name="Houses_Plots" EntityType="Self.Houses_Plots" />
+          <EntitySet Name="Owners" EntityType="Self.Owners" />
+          <EntitySet Name="Realtors" EntityType="Self.Realtors" />
+          <AssociationSet Name="FK_Apartaments_Flats" Association="Self.FK_Apartaments_Flats">
+            <End Role="Flats" EntitySet="Flats" />
+            <End Role="Apartaments" EntitySet="Apartaments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Apartaments_GarageParking" Association="Self.FK_Apartaments_GarageParking">
+            <End Role="GarageParking" EntitySet="GarageParking" />
+            <End Role="Apartaments" EntitySet="Apartaments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Apartaments_Houses_Plots" Association="Self.FK_Apartaments_Houses_Plots">
+            <End Role="Houses_Plots" EntitySet="Houses_Plots" />
+            <End Role="Apartaments" EntitySet="Apartaments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deals_Apartaments" Association="Self.FK_Deals_Apartaments">
+            <End Role="Apartaments" EntitySet="Apartaments" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flats_City" Association="Self.FK_Flats_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Flats" EntitySet="Flats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GarageParking_City" Association="Self.FK_GarageParking_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="GarageParking" EntitySet="GarageParking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Houses_Plots_City" Association="Self.FK_Houses_Plots_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Houses_Plots" EntitySet="Houses_Plots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Gender" Association="Self.FK_Clients_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deals_Clients" Association="Self.FK_Deals_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deals_Owners" Association="Self.FK_Deals_Owners">
+            <End Role="Owners" EntitySet="Owners" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deals_Realtors" Association="Self.FK_Deals_Realtors">
+            <End Role="Realtors" EntitySet="Realtors" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Owners_Gender" Association="Self.FK_Owners_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Owners" EntitySet="Owners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Realtors_Gender" Association="Self.FK_Realtors_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Realtors" EntitySet="Realtors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище EstateAgencyModelContainer" CdmEntityContainer="EstateAgencyEntities">
+          <EntitySetMapping Name="Apartaments">
+            <EntityTypeMapping TypeName="EstateAgencyModel.Apartaments">
+              <MappingFragment StoreEntitySet="Apartaments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HousesOrPlots" ColumnName="HousesOrPlots" />
+                <ScalarProperty Name="GarageParking" ColumnName="GarageParking" />
+                <ScalarProperty Name="Flats" ColumnName="Flats" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="EstateAgencyModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="City1" ColumnName="City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="EstateAgencyModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="NumberPhone" ColumnName="NumberPhone" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateBirth" ColumnName="DateBirth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Deals">
+            <EntityTypeMapping TypeName="EstateAgencyModel.Deals">
+              <MappingFragment StoreEntitySet="Deals">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Apartament" ColumnName="Apartament" />
+                <ScalarProperty Name="IDOwner" ColumnName="IDOwner" />
+                <ScalarProperty Name="IDRealtor" ColumnName="IDRealtor" />
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DealPrice" ColumnName="DealPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flats">
+            <EntityTypeMapping TypeName="EstateAgencyModel.Flats">
+              <MappingFragment StoreEntitySet="Flats">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Flat" ColumnName="Flat" />
+                <ScalarProperty Name="Entrance" ColumnName="Entrance" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GarageParking">
+            <EntityTypeMapping TypeName="EstateAgencyModel.GarageParking">
+              <MappingFragment StoreEntitySet="GarageParking">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="EstateAgencyModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Gender1" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Houses_Plots">
+            <EntityTypeMapping TypeName="EstateAgencyModel.Houses_Plots">
+              <MappingFragment StoreEntitySet="Houses/Plots">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Flat" ColumnName="Flat" />
+                <ScalarProperty Name="Entrance" ColumnName="Entrance" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owners">
+            <EntityTypeMapping TypeName="EstateAgencyModel.Owners">
+              <MappingFragment StoreEntitySet="Owners">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="NumberPhone" ColumnName="NumberPhone" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateBirth" ColumnName="DateBirth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Realtors">
+            <EntityTypeMapping TypeName="EstateAgencyModel.Realtors">
+              <MappingFragment StoreEntitySet="Realtors">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="NumberPhone" ColumnName="NumberPhone" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateBirth" ColumnName="DateBirth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
