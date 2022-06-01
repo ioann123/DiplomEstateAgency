@@ -27,7 +27,7 @@
             <TextBlock>Покупатель</TextBlock>
             <ComboBox x:Name="Cli" DisplayMemberPath="Surname" SelectedItem="{Binding Clients}"/>
             <TextBlock>Дата_сделки</TextBlock>
-            <TextBox x:Name="DateS" Text="{Binding Date}"></TextBox>
+            <DatePicker x:Name="DateS" SelectedDate="{Binding Date}"></DatePicker>
             <TextBlock>Цена_сделки</TextBlock>
             <TextBox x:Name="DealPriceS" Text="{Binding DealPrice}"></TextBox>
         </UniformGrid>

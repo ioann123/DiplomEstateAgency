@@ -28,11 +28,8 @@
         </Menu>
 
         <StackPanel  Orientation="Horizontal">
-            <TextBlock FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal"  Grid.Row="5">
-            
+            <TextBlock>Пол</TextBlock>
+            <ComboBox x:Name="CmbSurName" SelectionChanged="CmbSurName_SelectionChanged" DisplayMemberPath="Gender1" SelectedItem="{Binding Gender}" Width="125"/>
             <TextBlock>Телефон</TextBlock>
             <TextBox x:Name="NPhone" TextChanged="NPhone_TextChanged" Width="78"></TextBox>
         </StackPanel>
@@ -43,7 +40,7 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Patronymic" Binding="{Binding Patronymic}"/>
                 <DataGridTextColumn Header="NumberPhone" Binding="{Binding NumberPhone}"/>
-                <DataGridTextColumn Header="Gender" Binding="{Binding Gender.Gender1}"/>
+                <DataGridTextColumn Header="Gender" Binding="{Binding Gender1.Gender1}"/>
                 <DataGridTextColumn Header="DateBirth" Binding="{Binding DateBirth}"/>
                 <DataGridTemplateColumn Header="Редактировать">
                     <DataGridTemplateColumn.CellTemplate>

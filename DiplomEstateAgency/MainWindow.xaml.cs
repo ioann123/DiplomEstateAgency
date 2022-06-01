@@ -66,6 +66,7 @@ namespace DiplomEstateAgency
             var currentCar = BtnEdit.DataContext as Deals;
             var EdiWindow = new WindowAddUpdateDeals(context, currentCar);
             EdiWindow.ShowDialog();
+            ShowTable();
         }
 
         private void Realtors_Click(object sender, RoutedEventArgs e)

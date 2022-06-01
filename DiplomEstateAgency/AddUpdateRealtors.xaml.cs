@@ -32,6 +32,7 @@ namespace DiplomEstateAgency
         {
             context.SaveChanges();
             this.Close();
+            
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)

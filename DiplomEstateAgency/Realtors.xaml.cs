@@ -29,24 +29,14 @@ namespace DiplomEstateAgency
             InitializeComponent();
             this.context = context;
             this.DataContext = newrealtors;
+            CmbSurName.ItemsSource = context.Gender.ToList();
             ShowTable();
             ShowLetters();
         }
 
         private void ShowLetters()
         {
-            for (char i = 'А'; i <= 'Я'; i++)
-            {
-                TextBlock letter = new TextBlock
-                {
-                    Text = i.ToString(),
-                    FontWeight = FontWeights.Bold,
-                    Foreground = Brushes.Black,
-                    Margin = new Thickness(10, 1, 5, 1)
-                };
-                letter.MouseLeftButtonDown += TextBlock_MouseLeftButtonDown;
-                StckLttrs.Children.Add(letter);
-            }
+            
         }
 
         private void ShowTable()
@@ -97,6 +87,7 @@ namespace DiplomEstateAgency
             var currentCar = AddPokup.DataContext as Realtors;
             var EdiWindow = new AddUpdateRealtors(context, currentCar);
             EdiWindow.ShowDialog();
+            ShowTable();
         }
 
         private void SName_TextChanged(object sender, TextChangedEventArgs e)
@@ -106,19 +97,32 @@ namespace DiplomEstateAgency
 
         private void NPhone_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ShowTable();
+            List<Realtors> clientServices = context.Realtors.ToList();
+            clientServices = clientServices.Where(p => p.NumberPhone.Contains(NPhone.Text)).ToList();
+            if (clientServices.Count ==0)
+            {
+                MessageBox.Show("Данные не найдены", "Уведомление", MessageBoxButton.OK,MessageBoxImage.Information);
+                
+                
+            }
+            DataGrid2.ItemsSource = clientServices;
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var label = (TextBlock)sender;
-            currentLetter = label.Text;
-            foreach (TextBlock letter in StckLttrs.Children)
+            ///
+        }
+
+        private void CmbSurName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Gender gender = CmbSurName.SelectedItem as Gender;
+            List<Realtors> realtors = context.Realtors.ToList();
+            realtors = realtors.Where(p => p.Gender == gender.ID).ToList();
+            if (realtors.Count == 0)
             {
-                letter.Foreground = Brushes.Black;
+                MessageBox.Show("Данные не найдены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            label.Foreground = Brushes.Red;
-            ShowTable();
+            DataGrid2.ItemsSource = realtors;
         }
     }
 }

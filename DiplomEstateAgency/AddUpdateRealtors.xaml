@@ -27,9 +27,9 @@
             <TextBlock>НомерТелефона</TextBlock>
             <TextBox x:Name="Numb" Text="{Binding NumberPhone}"></TextBox>
             <TextBlock>Gender</TextBlock>
-            <ComboBox x:Name="ge" DisplayMemberPath="Gender1" SelectedItem="{Binding Gender}"/>
+            <ComboBox x:Name="ge" DisplayMemberPath="Gender1" SelectedItem="{Binding Gender1}"/>
             <TextBlock>DateBirth</TextBlock>
-            <TextBox x:Name="date" Text="{Binding DateBirth}"></TextBox>
+            <DatePicker x:Name="date" SelectedDate="{Binding DateBirth}"/>
         </UniformGrid>
         <Button x:Name="BtnSaveData" Click="BtnSaveData_Click" Grid.ColumnSpan="3" Margin="0,304,0,0" Grid.RowSpan="2">Сохранить</Button>
         <Button x:Name="BtnExit" Grid.Row="1" Click="BtnExit_Click" Grid.ColumnSpan="3" Margin="0,60,0,0" Grid.RowSpan="2">Назад</Button>
